@@ -23,7 +23,7 @@ if not os.path.exists(file_path):
     )
 
 # Read the text content from the file
-loader = TextLoader(file_path)
+loader = TextLoader(file_path, encoding='utf-8')
 documents = loader.load()
 
 # Define the embedding model
@@ -65,6 +65,7 @@ create_vector_store(sent_docs, "chroma_db_sent")
 # 3. Token-based Splitting
 # Splits text into chunks based on tokens (words or subwords), using tokenizers like GPT-2.
 # Useful for transformer models with strict token limits.
+# This is not used very often, especially not in documents
 print("\n--- Using Token-based Splitting ---")
 token_splitter = TokenTextSplitter(chunk_overlap=0, chunk_size=512)
 token_docs = token_splitter.split_documents(documents)
@@ -73,6 +74,7 @@ create_vector_store(token_docs, "chroma_db_token")
 # 4. Recursive Character-based Splitting
 # Attempts to split text at natural boundaries (sentences, paragraphs) within character limit.
 # Balances between maintaining coherence and adhering to character limits.
+# This is the best splitter for this dataset, this is used the most in the industry
 print("\n--- Using Recursive Character-based Splitting ---")
 rec_char_splitter = RecursiveCharacterTextSplitter(
     chunk_size=1000, chunk_overlap=100)

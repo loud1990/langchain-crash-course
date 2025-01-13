@@ -31,7 +31,7 @@ if not os.path.exists(persistent_directory):
     documents = []
     for book_file in book_files:
         file_path = os.path.join(books_dir, book_file)
-        loader = TextLoader(file_path)
+        loader = TextLoader(file_path, encoding='utf-8')
         book_docs = loader.load()
         for doc in book_docs:
             # Add metadata to each document indicating its source
@@ -39,7 +39,7 @@ if not os.path.exists(persistent_directory):
             documents.append(doc)
 
     # Split the documents into chunks
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200) # overlap of 200 or even 400 will provide better results, but it will also take longer to process 
     docs = text_splitter.split_documents(documents)
 
     # Display information about the split documents

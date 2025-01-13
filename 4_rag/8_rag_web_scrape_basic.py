@@ -19,7 +19,7 @@ persistent_directory = os.path.join(db_dir, "chroma_db_apple")
 urls = ["https://www.apple.com/"]
 
 # Create a loader for web content
-loader = WebBaseLoader(urls)
+loader = WebBaseLoader(urls, encoding='utf-8')
 documents = loader.load()
 
 # Step 2: Split the scraped content into chunks

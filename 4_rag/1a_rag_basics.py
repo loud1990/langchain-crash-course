@@ -20,12 +20,12 @@ if not os.path.exists(persistent_directory):
             f"The file {file_path} does not exist. Please check the path."
         )
 
-    # Read the text content from the file
-    loader = TextLoader(file_path)
+    # Read the text content from the file with UTF-8 encoding
+    loader = TextLoader(file_path, encoding='utf-8')
     documents = loader.load()
 
     # Split the document into chunks
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200) # overlap of 200 or even 400 will provide better results, but it will also take longer to process
     docs = text_splitter.split_documents(documents)
 
     # Display information about the split documents

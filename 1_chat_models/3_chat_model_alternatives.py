@@ -27,7 +27,8 @@ print(f"Answer from OpenAI: {result.content}")
 
 # Create a Anthropic model
 # Anthropic models: https://docs.anthropic.com/en/docs/models-overview
-model = ChatAnthropic(model="claude-3-opus-20240229")
+# model = ChatAnthropic(model="claude-3-opus-20240229")
+model = ChatAnthropic(model="claude-3-haiku-20240307")
 
 result = model.invoke(messages)
 print(f"Answer from Anthropic: {result.content}")
